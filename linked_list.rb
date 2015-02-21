@@ -41,6 +41,20 @@ class IterativeLinkedList
     @count += 1
   end
 
+  def remove(data)
+    current = @head
+    while current.next_node != nil
+      current = current.next_node
+      if current.next_node == nil
+        "ERROR"
+      else
+        current.next_node.data == data
+        new_next = current.next_node.next_node
+        current.next_node_is(new_next)
+      end
+    end
+  end
+
   def tail
     current = @head
     while current.next_node != nil
@@ -90,7 +104,7 @@ class Node
 
   attr_accessor :data, :next_node
 
-  def initialize(data=nil, next_node=nil)
+  def initialize(data, next_node=nil)
     @data = data
     @next_node = next_node
   end
@@ -120,6 +134,8 @@ list.append_node(node1)
 list.append_node(node2)
 list.append_node(node3)
 list.append_node(node4)
+
+puts node4.data
 
 # puts list.head?.data
 # puts list.head?.next_node.data

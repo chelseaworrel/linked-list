@@ -13,7 +13,7 @@ class IterativeLinkedListTest < Minitest::Test
   end
 
   def test_a_node_can_exist
-    assert, node1 = Node.new
+    assert, node1 = Node.new("a")
   end
 
   def test_a_node_can_have_data
@@ -23,19 +23,19 @@ class IterativeLinkedListTest < Minitest::Test
 
 
   def test_nodes_have_a_next
-    node1 = Node.new
-    node2 = Node.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
     assert_equal node2 , node1.next_node_is(node2)
   end
 
   def test_nodes_start_with_nil_as_next_node
-    node1 = Node.new
+    node1 = Node.new("a")
     assert_equal nil, node1.next_node
   end
 
   def test_lists_can_have_a_head
     linked_list = IterativeLinkedList.new
-    node1 = Node.new
+    node1 = Node.new("a")
     assert_equal node1, linked_list.head(node1)
   end
 
@@ -46,28 +46,28 @@ class IterativeLinkedListTest < Minitest::Test
 
   def test_you_can_insert_a_node_into_an_empty_list
     linked_list = IterativeLinkedList.new
-    node1 = Node.new
+    node1 = Node.new("a")
     assert_equal node1, linked_list.head(node1)
   end
 
   def test_when_you_insert_a_node_into_an_empty_list_it_is_the_head
     linked_list = IterativeLinkedList.new
-    node1 = Node.new
+    node1 = Node.new("a")
     linked_list.head(node1)
     assert_equal node1, linked_list.head?
   end
 
   def test_when_nod_is_first_node_it_becomes_head
     linked_list = IterativeLinkedList.new
-    node1 = Node.new
+    node1 = Node.new("a")
     linked_list.append_node(node1)
     assert_equal node1, linked_list.head?
   end
 
   def test_when_a_second_node_is_added_the_first_points_to_it
     linked_list = IterativeLinkedList.new
-    node1 = Node.new
-    node2 = Node.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
     linked_list.append_node(node1)
     linked_list.append_node(node2)
     assert_equal node2, node1.next_node
@@ -75,8 +75,8 @@ class IterativeLinkedListTest < Minitest::Test
 
   def test_there_is_a_tail_of_the_list_with_nil_as_next_node
     linked_list = IterativeLinkedList.new
-    node1 = Node.new
-    node2 = Node.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
     linked_list.append_node(node1)
     linked_list.append_node(node2)
     assert_equal true, node2.tail?
@@ -84,9 +84,9 @@ class IterativeLinkedListTest < Minitest::Test
 
   def test_when_a_third_node_is_added_the_second_Points_to_it
     linked_list = IterativeLinkedList.new
-    node1 = Node.new
-    node2 = Node.new
-    node3 = Node.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
     linked_list.append_node(node1)
     linked_list.append_node(node2)
     linked_list.append_node(node3)
@@ -95,10 +95,10 @@ class IterativeLinkedListTest < Minitest::Test
 
   def test_when_a_fourth_node_is_added_the_third_Points_to_it
     linked_list = IterativeLinkedList.new
-    node1 = Node.new
-    node2 = Node.new
-    node3 = Node.new
-    node4 = Node.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
     linked_list.append_node(node1)
     linked_list.append_node(node2)
     linked_list.append_node(node3)
@@ -108,10 +108,10 @@ class IterativeLinkedListTest < Minitest::Test
 
   def test_it_can_count_its_elements
     linked_list = IterativeLinkedList.new
-    node1 = Node.new
-    node2 = Node.new
-    node3 = Node.new
-    node4 = Node.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
     linked_list.append_node(node1)
     linked_list.append_node(node2)
     linked_list.append_node(node3)
@@ -121,10 +121,10 @@ class IterativeLinkedListTest < Minitest::Test
 
   def test_it_can_access_the_tail
     linked_list = IterativeLinkedList.new
-    node1 = Node.new
-    node2 = Node.new
-    node3 = Node.new
-    node4 = Node.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
     linked_list.append_node(node1)
     linked_list.append_node(node2)
     linked_list.append_node(node3)
@@ -209,6 +209,52 @@ class IterativeLinkedListTest < Minitest::Test
     linked_list.append_node_front(node4)
     assert_equal node4, linked_list.head?
   end
+
+  def test_it_can_remove_a_node_by_its_data
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node3)
+    linked_list.append_node(node4)
+    linked_list.remove("c")
+    assert_equal 3, linked_list.count
+  end
+
+  def test_when_a_node_is_removed_the_previous_node_now_points_to_its_next
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node3)
+    linked_list.append_node(node4)
+    linked_list.remove("c")
+    assert_equal node4, node2.next_node
+  end
+
+  def test_it_can_remove_the_tail_with_remove
+    skip
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node3)
+    linked_list.append_node(node4)
+    linked_list.remove("d")
+    assert_equal node3, linked_list.tail
+  end
+
+  #need to make remove able to remove head or tail based on data(without errors)
+
 
 
 
