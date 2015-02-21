@@ -129,6 +129,20 @@ class IterativeLinkedListTest < Minitest::Test
     assert_equal node4, linked_list.tail
   end
 
+  def test_it_can_remove_the_last_node
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node3)
+    linked_list.append_node(node4)
+    linked_list.pop_tail
+    assert_equal node3, linked_list.tail
+  end
+
 
 
 end

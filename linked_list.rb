@@ -48,6 +48,14 @@ class IterativeLinkedList
     @tail
   end
 
+  def pop_tail
+    current = @head
+    until current.next_node.next_node == nil
+      current = current.next_node
+    end
+    current.next_node_is(nil)
+  end
+
 end
 
 
@@ -75,11 +83,13 @@ class Node
 end
 
 list = IterativeLinkedList.new
-node1 = Node.new
-node2 = Node.new
-node3 = Node.new
+node1 = Node.new("a")
+node2 = Node.new("b")
+node3 = Node.new("c")
 
 
 list.append_node(node1)
 list.append_node(node2)
 list.append_node(node3)
+list.pop_tail
+list.tail
