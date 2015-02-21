@@ -56,6 +56,25 @@ class IterativeLinkedList
     current.next_node_is(nil)
   end
 
+  def access_node(number)
+    if number == 1
+      @head
+    else
+      current = @head
+      number -= 1
+      while number > 0
+        if current.next_node == nil
+           current = "ERROR: no-node-land"
+           number = 0
+        else
+          current = current.next_node
+          number -= 1
+        end
+      end
+       current
+    end
+  end
+
 end
 
 
@@ -86,10 +105,12 @@ list = IterativeLinkedList.new
 node1 = Node.new("a")
 node2 = Node.new("b")
 node3 = Node.new("c")
+node4 = Node.new("d")
 
 
 list.append_node(node1)
 list.append_node(node2)
 list.append_node(node3)
-list.pop_tail
-list.tail
+list.append_node(node4)
+puts list.tail.data
+puts list.access_node(5)

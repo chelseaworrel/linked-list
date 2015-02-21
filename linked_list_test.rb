@@ -143,6 +143,45 @@ class IterativeLinkedListTest < Minitest::Test
     assert_equal node3, linked_list.tail
   end
 
+  def test_it_can_acces_node_by_number
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node3)
+    linked_list.append_node(node4)
+    assert_equal node3, linked_list.access_node(3)
+  end
+
+  def test_it_can_access_the_head_if_given_1
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node3)
+    linked_list.append_node(node4)
+    assert_equal node1, linked_list.access_node(1)
+  end
+
+  def test_it_wont_break_if_given_a_number_beyond_the_tail
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node3)
+    linked_list.append_node(node4)
+    assert_equal "ERROR: no-node-land", linked_list.access_node(5)
+  end
+
 
 
 end
