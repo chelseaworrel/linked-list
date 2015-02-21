@@ -3,6 +3,9 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require_relative 'linked_list'
 
+#ask about my variables being weird @head can't print, and the nodes show up as their object
+
+
 class IterativeLinkedListTest < Minitest::Test
 
   def Setup
@@ -180,6 +183,31 @@ class IterativeLinkedListTest < Minitest::Test
     linked_list.append_node(node3)
     linked_list.append_node(node4)
     assert_equal "ERROR: no-node-land", linked_list.access_node(5)
+  end
+
+  def test_it_can_pop_the_head_node
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node3)
+    linked_list.pop_head
+    assert_equal node2, linked_list.head?
+  end
+
+  def test_it_can_push_a_node_onto_the_front
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node3)
+    linked_list.append_node_front(node4)
+    assert_equal node4, linked_list.head?
   end
 
 

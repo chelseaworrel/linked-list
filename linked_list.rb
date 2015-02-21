@@ -1,7 +1,6 @@
 class IterativeLinkedList
 
-  attr_accessor :head
-  attr_reader :count, :tail
+  attr_accessor :head, :tail, :count
 
   def initialize(head=nil)
     @head = head
@@ -25,6 +24,11 @@ class IterativeLinkedList
       end
       current.next_node_is(node)
     end
+  end
+
+  def append_node_front(node)
+    node.next_node_is(@head)
+    @head = node
   end
 
   def count
@@ -54,6 +58,10 @@ class IterativeLinkedList
       current = current.next_node
     end
     current.next_node_is(nil)
+  end
+
+  def pop_head
+    @head = @head.next_node
   end
 
   def access_node(number)
@@ -112,5 +120,9 @@ list.append_node(node1)
 list.append_node(node2)
 list.append_node(node3)
 list.append_node(node4)
-puts list.tail.data
-puts list.access_node(5)
+
+# puts list.head?.data
+# puts list.head?.next_node.data
+# list.pop_head
+# puts list.head?.data
+# puts list.head?.next_node.data
