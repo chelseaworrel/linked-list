@@ -70,5 +70,25 @@ class IterativeLinkedListTest < Minitest::Test
     assert_equal node2, node1.next_node?
   end
 
+  def test_there_is_a_tail_of_the_list_with_nil_as_next_node
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new
+    node2 = Node.new
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    assert_equal true, node2.tail?
+  end
+
+  def test_when_a_third_node_is_added_the_second_Points_to_it
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new
+    node2 = Node.new
+    node3 = Node.new
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node3)
+    assert_equal node3, node2.next_node?
+  end
+
 
 end
