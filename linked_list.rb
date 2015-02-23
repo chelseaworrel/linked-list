@@ -1,3 +1,25 @@
+
+# class LinkedList
+#
+#   attr_accessor :head, :tail
+#
+#   def initialize(head=nil)
+#     @head = head
+#   end
+#
+#   def head(node)
+#     @head = node
+#   end
+#
+#   def head?
+#     @head
+#   end
+#
+# end
+
+
+
+
 class IterativeLinkedList
 
   attr_accessor :head, :tail, :count
@@ -44,9 +66,10 @@ class IterativeLinkedList
   def remove(data)
     current = @head
     while current.next_node != nil
+
       current = current.next_node
       if current.next_node == nil
-        "ERROR"
+        "error"
       else
         current.next_node.data == data
         new_next = current.next_node.next_node
@@ -97,6 +120,42 @@ class IterativeLinkedList
     end
   end
 
+  def remove_position(number)
+    if number == 1
+      pop_head
+    else
+      number -= 2
+      current = @head
+      while number > 0
+        current = current.next_node
+        number -= 1
+      end
+      new_next = current.next_node.next_node
+      current.next_node_is(new_next)
+    end
+  end
+
+  def append_node_postion(node, number)
+    if number == 1
+      append_node_front(node)
+    else
+      number -= 2
+      current = @head
+      while number > 0
+        if current.next_node == nil
+          "error"
+          number == 0
+        else
+          current = current.next_node
+          number -= 1
+        end
+      end
+      current
+      node.next_node_is(current.next_node.next_node)
+      current.next_node_is(node)
+    end
+  end
+
 end
 
 
@@ -123,22 +182,35 @@ class Node
 
 end
 
-list = IterativeLinkedList.new
-node1 = Node.new("a")
-node2 = Node.new("b")
-node3 = Node.new("c")
-node4 = Node.new("d")
+class RecursiveLinkedList
 
+  attr_accessor :r_head, :tail, :count
 
-list.append_node(node1)
-list.append_node(node2)
-list.append_node(node3)
-list.append_node(node4)
+  def initialize(head=nil)
+    @r_head = head
+  end
 
-puts node4.data
+  def r_head(node)
+    @r_head = node
+  end
 
-# puts list.head?.data
-# puts list.head?.next_node.data
-# list.pop_head
-# puts list.head?.data
-# puts list.head?.next_node.data
+  def r_head?
+    @r_head
+  end
+
+  def r_append_node(node)
+    if @r_head == nil
+      @r_head = node
+    else
+      current = @head
+      return if current.next_node == nil
+          current = current.next_node
+          current.next_node_is(node)
+      end
+  end
+
+  def r_head?
+    @r_head
+  end
+
+end
