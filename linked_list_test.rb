@@ -327,6 +327,40 @@ class IterativeLinkedListTest < Minitest::Test
     assert_equal node1, node4.next_node
   end
 
+  def test_it_can_add_an_node_after_a_known_node
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node4)
+    linked_list.append_node_after(node4, node2)
+    assert_equal node4, node2.next_node
+  end
+
+  def test_it_can_return_true_if_specific_data_is_contained_in_the_list
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node3)
+    assert_equal true, linked_list.contain?("b")
+  end
+
+  def test_it_can_return_false_if_specific_data_is_not_contained_in_the_list
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node3)
+    assert_equal false, linked_list.contain?("d")
+  end
 
 
 
