@@ -22,7 +22,7 @@
 
 class IterativeLinkedList
 
-  attr_accessor :head, :tail, :count
+  attr_reader :head
 
   def initialize(head=nil)
     @head = head
@@ -161,7 +161,8 @@ end
 
 class Node
 
-  attr_accessor :data, :next_node
+  attr_accessor :next_node
+  attr_reader :data
 
   def initialize(data, next_node=nil)
     @data = data
@@ -184,10 +185,11 @@ end
 
 class RecursiveLinkedList
 
-  attr_accessor :r_head, :tail, :count
+  attr_reader :r_head, :tail, :r_count
 
   def initialize(head=nil)
     @r_head = head
+    @r_count = 0
   end
 
   def r_head(node)
@@ -198,19 +200,36 @@ class RecursiveLinkedList
     @r_head
   end
 
-  def r_append_node(node)
-    if @r_head == nil
-      @r_head = node
+  def r_append_node(node_append, node=@r_head)
+    if node == nil
+      @r_head = node_append
+    elsif node.next_node
+        r_append_node(node_append, node.next_node)
     else
-      current = @head
-      return if current.next_node == nil
-          current = current.next_node
-          current.next_node_is(node)
-      end
+      node.next_node_is(node_append)
+    end
   end
 
-  def r_head?
-    @r_head
+  def r_count(node=@r_head)
+    if node.next_node == nil
+      @r_count += 1
+    else
+      node.next_node
+      @r_count += 1
+      r_count(node.next_node)
+    end
   end
 
 end
+
+
+linked_list = RecursiveLinkedList.new
+node1 = Node.new("a")
+node2 = Node.new("b")
+node3 = Node.new("c")
+node4 = Node.new("d")
+linked_list.r_append_node(node1)
+linked_list.r_append_node(node2)
+linked_list.r_append_node(node3)
+linked_list.r_append_node(node4)
+puts linked_list.r_count

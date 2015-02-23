@@ -3,7 +3,9 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require_relative 'linked_list'
 
-#ask about my variables being weird @head can't print, and the nodes show up as their object
+#ask about my variables being weird @head can't print,
+
+#add the popped nodes in so they are returned
 
 
 class IterativeLinkedListTest < Minitest::Test
@@ -311,7 +313,7 @@ class IterativeLinkedListTest < Minitest::Test
     assert_equal node4, node2.next_node
   end
 
-  def test_what_happens_when_it_gets_appended_to_the_first_position
+  def test_it_becomes_the_head_when_it_gets_appended_to_the_first_position
     linked_list = IterativeLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
@@ -359,7 +361,6 @@ class RecursiveLinkedListTest < Minitest::Test
   end
 
   def test_when_a_second_node_is_added_the_first_points_to_it
-    skip
     linked_list = RecursiveLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
@@ -368,54 +369,50 @@ class RecursiveLinkedListTest < Minitest::Test
     assert_equal node2, node1.next_node
   end
 
-  def test_there_is_a_tail_of_the_list_with_nil_as_next_node
-    skip
-    linked_list = RecursiveLinkedList.new
-    node1 = Node.new("a")
-    node2 = Node.new("b")
-    linked_list.append_node(node1)
-    linked_list.append_node(node2)
-    assert_equal true, node2.tail?
-  end
-
-  def test_when_a_third_node_is_added_the_second_Points_to_it
-    skip
+  def test_when_a_third_node_is_added_the_second_points_to_it
     linked_list = RecursiveLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
     node3 = Node.new("c")
-    linked_list.append_node(node1)
-    linked_list.append_node(node2)
-    linked_list.append_node(node3)
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
     assert_equal node3, node2.next_node
   end
 
+  def test_there_is_a_tail_of_the_list_with_nil_as_next_node
+    linked_list = RecursiveLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    assert_equal true, node2.tail?
+  end
+
   def test_when_a_fourth_node_is_added_the_third_Points_to_it
-    skip
     linked_list = RecursiveLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
     node3 = Node.new("c")
     node4 = Node.new("d")
-    linked_list.append_node(node1)
-    linked_list.append_node(node2)
-    linked_list.append_node(node3)
-    linked_list.append_node(node4)
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+    linked_list.r_append_node(node4)
     assert_equal node4, node3.next_node
   end
 
   def test_it_can_count_its_elements
-    skip
     linked_list = RecursiveLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
     node3 = Node.new("c")
     node4 = Node.new("d")
-    linked_list.append_node(node1)
-    linked_list.append_node(node2)
-    linked_list.append_node(node3)
-    linked_list.append_node(node4)
-    assert_equal 4, linked_list.count
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+    linked_list.r_append_node(node4)
+    assert_equal 4, linked_list.r_count
   end
 
   def test_it_can_access_the_tail
