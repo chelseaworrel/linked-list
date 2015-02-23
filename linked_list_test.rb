@@ -255,7 +255,6 @@ class IterativeLinkedListTest < Minitest::Test
   end
 
   def test_it_can_remove_the_tail_with_remove
-    skip
     linked_list = IterativeLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
@@ -612,6 +611,35 @@ class RecursiveLinkedListTest < Minitest::Test
     assert_equal node3, node1.next_node
   end
 
+  def test_it_can_insert_a_node_at_a_specified_position
+    skip
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+
+    linked_list.r_append_node_postion(node4, 2)
+    assert_equal node4, node1.next_node
+  end
+
+  def test_it_can_insert_a_node_at_a_specified_position_again
+    skip
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+
+    linked_list.r_append_node_postion(node4, 3)
+    assert_equal node4, node2.next_node
+  end
 
 
 

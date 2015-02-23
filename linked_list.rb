@@ -44,15 +44,20 @@ class IterativeLinkedList
 
   def remove(data)
     current = @head
-    while current.next_node != nil
-      current = current.next_node
-      if current.next_node == nil
-        "error"
-      else
-        current.next_node.data == data
-        new_next = current.next_node.next_node
-        current.next_node_is(new_next)
+    if tail.data == data
+      pop_tail
+    else
+      while current.next_node != nil
+        current = current.next_node
+        if current.next_node == nil
+          current.next_node_is(nil)
+        else
+          current.next_node.data == data
+          new_next = current.next_node.next_node
+          current.next_node_is(new_next)
+         end
       end
+      current.next_node
     end
   end
 
@@ -72,6 +77,7 @@ class IterativeLinkedList
     until current.next_node.next_node == nil
       current = current.next_node
     end
+    current.next_node.next_node
     current.next_node_is(nil)
   end
 
@@ -289,14 +295,14 @@ class RecursiveLinkedList
 
 end
 
-
-linked_list = RecursiveLinkedList.new
+linked_list = IterativeLinkedList.new
 node1 = Node.new("a")
 node2 = Node.new("b")
 node3 = Node.new("c")
 node4 = Node.new("d")
-linked_list.r_append_node(node1)
-linked_list.r_append_node(node2)
-linked_list.r_append_node(node3)
-linked_list.r_append_node(node4)
-linked_list.r_access_node(3)
+linked_list.append_node(node1)
+linked_list.append_node(node2)
+linked_list.append_node(node3)
+linked_list.append_node(node4)
+linked_list.remove("d")
+linked_list.tail
