@@ -362,6 +362,23 @@ class IterativeLinkedListTest < Minitest::Test
     assert_equal false, linked_list.contain?("d")
   end
 
+  def test_it_can_find_the_distance_between_two_nodes
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    node5 = Node.new("e")
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node3)
+    linked_list.append_node(node4)
+    linked_list.append_node(node5)
+
+    assert_equal 2, linked_list.distance(node2, node4)
+    assert_equal 3, linked_list.distance(node2, node5)
+  end
+
 
 
 

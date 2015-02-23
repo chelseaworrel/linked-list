@@ -179,6 +179,22 @@ class IterativeLinkedList
     @exist
   end
 
+  def distance(node1, node2)
+    current = @head
+    until current.next_node == nil
+      current = current.next_node
+      if current == node1
+        @node_spaces = 0
+        @node_spaces += 1
+      elsif current == node2
+        break
+      else
+        @node_spaces += 1
+      end
+    end
+    @node_spaces
+  end
+
 end
 
 
