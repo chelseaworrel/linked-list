@@ -268,7 +268,6 @@ class IterativeLinkedListTest < Minitest::Test
     assert_equal node3, linked_list.tail
   end
 
-  #need to make remove able to remove head or tail based on data(without errors)
 
   def test_it_can_remove_a_node_based_on_position
     linked_list = IterativeLinkedList.new
@@ -612,8 +611,7 @@ class RecursiveLinkedListTest < Minitest::Test
   end
 
   def test_it_can_insert_a_node_at_a_specified_position
-    skip
-    linked_list = IterativeLinkedList.new
+    linked_list = RecursiveLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
     node3 = Node.new("c")
@@ -622,13 +620,12 @@ class RecursiveLinkedListTest < Minitest::Test
     linked_list.r_append_node(node2)
     linked_list.r_append_node(node3)
 
-    linked_list.r_append_node_postion(node4, 2)
+    linked_list.r_append_node_position(node4, 2)
     assert_equal node4, node1.next_node
   end
 
   def test_it_can_insert_a_node_at_a_specified_position_again
-    skip
-    linked_list = IterativeLinkedList.new
+    linked_list = RecursiveLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
     node3 = Node.new("c")
@@ -637,8 +634,22 @@ class RecursiveLinkedListTest < Minitest::Test
     linked_list.r_append_node(node2)
     linked_list.r_append_node(node3)
 
-    linked_list.r_append_node_postion(node4, 3)
+    linked_list.r_append_node_position(node4, 3)
     assert_equal node4, node2.next_node
+  end
+
+  def test_it_can_insert_a_node_at_a_specified_position_if_that_position_is_1
+    linked_list = RecursiveLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+
+    linked_list.r_append_node_position(node4, 1)
+    assert_equal node4, linked_list.r_head?
   end
 
 

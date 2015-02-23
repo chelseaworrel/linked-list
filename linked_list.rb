@@ -293,6 +293,19 @@ class RecursiveLinkedList
       end
     end
 
+    def r_append_node_position(new_node, number, node=@r_head)
+      if number == 2
+        new_node.next_node_is(node.next_node)
+        node.next_node_is(new_node)
+      elsif number == 1
+        r_append_node_front(new_node)
+      else
+        number -=1
+        node.next_node
+        r_append_node_position(new_node, number, node.next_node)
+      end
+    end
+
 end
 
 linked_list = IterativeLinkedList.new
