@@ -1,25 +1,4 @@
 
-# class LinkedList
-#
-#   attr_accessor :head, :tail
-#
-#   def initialize(head=nil)
-#     @head = head
-#   end
-#
-#   def head(node)
-#     @head = node
-#   end
-#
-#   def head?
-#     @head
-#   end
-#
-# end
-
-
-
-
 class IterativeLinkedList
 
   attr_reader :head
@@ -66,7 +45,6 @@ class IterativeLinkedList
   def remove(data)
     current = @head
     while current.next_node != nil
-
       current = current.next_node
       if current.next_node == nil
         "error"
@@ -276,17 +254,49 @@ class RecursiveLinkedList
         node.next_node
         r_pop_tail(node.next_node)
       end
+    end
 
+    def r_access_node(number, node=@r_head)
+      if number == 1
+        node
+      elsif node.next_node == nil
+        @r_tail
+      else
+        number -= 1
+        node.next_node
+        r_access_node(number, node.next_node)
+      end
+    end
+
+    def r_pop_head(node=@r_head)
+      @r_head = node.next_node
+    end
+
+    def r_append_node_front(new_node)
+      new_node.next_node_is(@r_head)
+      @r_head = new_node
+    end
+
+    def r_remove(data, node=@r_head)
+      if node.next_node.data == data
+        node.next_node_is(node.next_node.next_node)
+        node.next_node.next_node_is(nil)
+      else
+        node.next_node
+        r_remove(data, node.next_node)
+      end
     end
 
 end
 
 
-linked_list = IterativeLinkedList.new
+linked_list = RecursiveLinkedList.new
 node1 = Node.new("a")
 node2 = Node.new("b")
 node3 = Node.new("c")
-linked_list.append_node(node1)
-linked_list.append_node(node2)
-linked_list.append_node(node3)
-linked_list.contain?("b")
+node4 = Node.new("d")
+linked_list.r_append_node(node1)
+linked_list.r_append_node(node2)
+linked_list.r_append_node(node3)
+linked_list.r_append_node(node4)
+linked_list.r_access_node(3)

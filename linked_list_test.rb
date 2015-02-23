@@ -174,6 +174,20 @@ class IterativeLinkedListTest < Minitest::Test
     assert_equal node1, linked_list.access_node(1)
   end
 
+  def test_it_wont_break_if_given_a_number_for_the_tail
+    linked_list = IterativeLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.append_node(node1)
+    linked_list.append_node(node2)
+    linked_list.append_node(node3)
+    linked_list.append_node(node4)
+    assert_equal node4, linked_list.access_node(4)
+  end
+
+
   def test_it_wont_break_if_given_a_number_beyond_the_tail
     linked_list = IterativeLinkedList.new
     node1 = Node.new("a")
@@ -494,87 +508,108 @@ class RecursiveLinkedListTest < Minitest::Test
   end
 
   def test_it_can_acces_node_by_number
-    skip
     linked_list = RecursiveLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
     node3 = Node.new("c")
     node4 = Node.new("d")
-    linked_list.append_node(node1)
-    linked_list.append_node(node2)
-    linked_list.append_node(node3)
-    linked_list.append_node(node4)
-    assert_equal node3, linked_list.access_node(3)
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+    linked_list.r_append_node(node4)
+    assert_equal node3, linked_list.r_access_node(3)
   end
 
   def test_it_can_access_the_head_if_given_1
-    skip
     linked_list = RecursiveLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
     node3 = Node.new("c")
     node4 = Node.new("d")
-    linked_list.append_node(node1)
-    linked_list.append_node(node2)
-    linked_list.append_node(node3)
-    linked_list.append_node(node4)
-    assert_equal node1, linked_list.access_node(1)
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+    linked_list.r_append_node(node4)
+    assert_equal node1, linked_list.r_access_node(1)
+  end
+
+  def test_it_wont_break_if_given_tail_number
+    linked_list = RecursiveLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+    linked_list.r_append_node(node4)
+    assert_equal node4, linked_list.r_access_node(4)
   end
 
   def test_it_wont_break_if_given_a_number_beyond_the_tail
-    skip
     linked_list = RecursiveLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
     node3 = Node.new("c")
     node4 = Node.new("d")
-    linked_list.append_node(node1)
-    linked_list.append_node(node2)
-    linked_list.append_node(node3)
-    linked_list.append_node(node4)
-    assert_equal "ERROR: no-node-land", linked_list.access_node(5)
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+    linked_list.r_append_node(node4)
+    assert_equal nil, linked_list.r_access_node(5)
   end
 
   def test_it_can_pop_the_head_node
-    skip
     linked_list = RecursiveLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
     node3 = Node.new("c")
-    linked_list.append_node(node1)
-    linked_list.append_node(node2)
-    linked_list.append_node(node3)
-    linked_list.pop_head
-    assert_equal node2, linked_list.head?
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+    linked_list.r_pop_head
+    assert_equal node2, linked_list.r_head?
   end
 
   def test_it_can_push_a_node_onto_the_front
-    skip
     linked_list = RecursiveLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
     node3 = Node.new("c")
     node4 = Node.new("d")
-    linked_list.append_node(node1)
-    linked_list.append_node(node2)
-    linked_list.append_node(node3)
-    linked_list.append_node_front(node4)
-    assert_equal node4, linked_list.head?
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+    linked_list.r_append_node_front(node4)
+    assert_equal node4, linked_list.r_head?
   end
 
   def test_it_can_remove_a_node_by_its_data
-    skip
     linked_list = RecursiveLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
     node3 = Node.new("c")
     node4 = Node.new("d")
-    linked_list.append_node(node1)
-    linked_list.append_node(node2)
-    linked_list.append_node(node3)
-    linked_list.append_node(node4)
-    linked_list.remove("c")
-    assert_equal 3, linked_list.count
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+    linked_list.r_append_node(node4)
+    linked_list.r_remove("c")
+    assert_equal 3, linked_list.r_count
+  end
+
+  def test_it_can_remove_a_node_based_on_data_and_previous_points
+    linked_list = RecursiveLinkedList.new
+    node1 = Node.new("a")
+    node2 = Node.new("b")
+    node3 = Node.new("c")
+    node4 = Node.new("d")
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+    linked_list.r_append_node(node4)
+    linked_list.r_remove("b")
+    assert_equal node3, node1.next_node
   end
 
 
