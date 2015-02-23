@@ -416,32 +416,30 @@ class RecursiveLinkedListTest < Minitest::Test
   end
 
   def test_it_can_access_the_tail
-    skip
     linked_list = RecursiveLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
     node3 = Node.new("c")
     node4 = Node.new("d")
-    linked_list.append_node(node1)
-    linked_list.append_node(node2)
-    linked_list.append_node(node3)
-    linked_list.append_node(node4)
-    assert_equal node4, linked_list.tail
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+    linked_list.r_append_node(node4)
+    assert_equal node4, linked_list.r_tail
   end
 
   def test_it_can_remove_the_last_node
-    skip
     linked_list = RecursiveLinkedList.new
     node1 = Node.new("a")
     node2 = Node.new("b")
     node3 = Node.new("c")
     node4 = Node.new("d")
-    linked_list.append_node(node1)
-    linked_list.append_node(node2)
-    linked_list.append_node(node3)
-    linked_list.append_node(node4)
-    linked_list.pop_tail
-    assert_equal node3, linked_list.tail
+    linked_list.r_append_node(node1)
+    linked_list.r_append_node(node2)
+    linked_list.r_append_node(node3)
+    linked_list.r_append_node(node4)
+    linked_list.r_pop_tail
+    assert_equal node3, linked_list.r_tail
   end
 
   def test_it_can_acces_node_by_number

@@ -22,7 +22,7 @@
 
 class IterativeLinkedList
 
-  attr_reader :head
+  attr_reader :head  # => nil
 
   def initialize(head=nil)
     @head = head
@@ -161,20 +161,20 @@ end
 
 class Node
 
-  attr_accessor :next_node
-  attr_reader :data
+  attr_accessor :next_node  # => nil
+  attr_reader :data         # => nil
 
   def initialize(data, next_node=nil)
-    @data = data
-    @next_node = next_node
+    @data = data                       # => "a", "b", "c", "d"
+    @next_node = next_node             # => nil, nil, nil, nil
   end
 
   def next_node_is(node)
-    @next_node = node
+    @next_node = node     # => #<Node:0x007ff33a0ef300 @data="b", @next_node=nil>, #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>, #<Node:0x007ff33a0eece8 @data="d", @next_node=nil>
   end
 
   def next_node
-    @next_node
+    @next_node   # => nil, #<Node:0x007ff33a0ef300 @data="b", @next_node=nil>, #<Node:0x007ff33a0ef300 @data="b", @next_node=nil>, nil, #<Node:0x007ff33a0ef300 @data="b", @next_node=#<Node:0x007ff33a0ef008 @data="c", @next_node=nil>>, #<Node:0x007ff33a0ef300 @data="b", @next_node=#<Node:0x007ff33a0ef008 @data="c", @next_node=nil>>, #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>, #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>, nil, #<Node:0x007ff33a0ef300 @data="b", @next_node=#<Node:0x007ff33a0ef008 @data="c", @next_node=#<Node:0x007ff33a0eece8 @data="d", @next_node=nil>>>, #<Node:0x007ff33a0ef008 @data="c", @next_node=#<Node:0x007ff33a0eece8 @data="d", @next_node=nil>>, #<Node:0x007ff33a0ef300 @data="b", @next_node=#<Node:0x007ff33a0ef008 @data="c", @next_node=#<Node:0x007ff33a0eece8 @data="d", @next_node=nil>>>, #<Node:0x007ff33a0ef300 @data="b", @next_node=#<Node:0x007ff33a0ef008 @data="c", @next_node=#<Node:0x007ff33a0eece8 @data="d", @next_node=nil>>>, #<Node:0x007ff33a...
   end
 
   def tail?
@@ -185,11 +185,11 @@ end
 
 class RecursiveLinkedList
 
-  attr_reader :r_head, :tail, :r_count
+  attr_reader :r_head, :r_tail, :r_count  # => nil
 
   def initialize(head=nil)
-    @r_head = head
-    @r_count = 0
+    @r_head = head          # => nil
+    @r_count = 0            # => 0
   end
 
   def r_head(node)
@@ -201,13 +201,13 @@ class RecursiveLinkedList
   end
 
   def r_append_node(node_append, node=@r_head)
-    if node == nil
-      @r_head = node_append
-    elsif node.next_node
-        r_append_node(node_append, node.next_node)
+    if node == nil                                  # => true, false, false, false, false, false, false
+      @r_head = node_append                         # => #<Node:0x007ff33a0ef6e8 @data="a", @next_node=nil>
+    elsif node.next_node                            # => nil, #<Node:0x007ff33a0ef300 @data="b", @next_node=nil>, nil, #<Node:0x007ff33a0ef300 @data="b", @next_node=#<Node:0x007ff33a0ef008 @data="c", @next_node=nil>>, #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>, nil
+        r_append_node(node_append, node.next_node)  # => #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>, #<Node:0x007ff33a0eece8 @data="d", @next_node=nil>, #<Node:0x007ff33a0eece8 @data="d", @next_node=nil>
     else
-      node.next_node_is(node_append)
-    end
+      node.next_node_is(node_append)                # => #<Node:0x007ff33a0ef300 @data="b", @next_node=nil>, #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>, #<Node:0x007ff33a0eece8 @data="d", @next_node=nil>
+    end                                             # => #<Node:0x007ff33a0ef6e8 @data="a", @next_node=nil>, #<Node:0x007ff33a0ef300 @data="b", @next_node=nil>, #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>, #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>, #<Node:0x007ff33a0eece8 @data="d", @next_node=nil>, #<Node:0x007ff33a0eece8 @data="d", @next_node=nil>, #<Node:0x007ff33a0eece8 @data="d", @next_node=nil>
   end
 
   def r_count(node=@r_head)
@@ -220,16 +220,37 @@ class RecursiveLinkedList
     end
   end
 
+  def r_tail(node=@r_head)
+    if node.next_node == nil  # => false, false, true
+      @r_tail = node          # => #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>
+    else
+      node.next_node          # => #<Node:0x007ff33a0ef300 @data="b", @next_node=#<Node:0x007ff33a0ef008 @data="c", @next_node=nil>>, #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>
+      r_tail(node.next_node)  # => #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>, #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>
+    end                       # => #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>, #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>, #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>
+  end
+
+    def r_pop_tail(node=@r_head)
+      if node.next_node.next_node == nil  # => false, false, true
+        node.next_node                    # => #<Node:0x007ff33a0eece8 @data="d", @next_node=nil>
+        node.next_node = nil              # => nil
+      else
+        node.next_node                    # => #<Node:0x007ff33a0ef300 @data="b", @next_node=#<Node:0x007ff33a0ef008 @data="c", @next_node=#<Node:0x007ff33a0eece8 @data="d", @next_node=nil>>>, #<Node:0x007ff33a0ef008 @data="c", @next_node=#<Node:0x007ff33a0eece8 @data="d", @next_node=nil>>
+        r_pop_tail(node.next_node)        # => nil, nil
+      end                                 # => nil, nil, nil
+
+    end
+
 end
 
 
-linked_list = RecursiveLinkedList.new
-node1 = Node.new("a")
-node2 = Node.new("b")
-node3 = Node.new("c")
-node4 = Node.new("d")
-linked_list.r_append_node(node1)
-linked_list.r_append_node(node2)
-linked_list.r_append_node(node3)
-linked_list.r_append_node(node4)
-puts linked_list.r_count
+linked_list = RecursiveLinkedList.new  # => #<RecursiveLinkedList:0x007ff33a0efa58 @r_head=nil, @r_count=0>
+node1 = Node.new("a")                  # => #<Node:0x007ff33a0ef6e8 @data="a", @next_node=nil>
+node2 = Node.new("b")                  # => #<Node:0x007ff33a0ef300 @data="b", @next_node=nil>
+node3 = Node.new("c")                  # => #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>
+node4 = Node.new("d")                  # => #<Node:0x007ff33a0eece8 @data="d", @next_node=nil>
+linked_list.r_append_node(node1)       # => #<Node:0x007ff33a0ef6e8 @data="a", @next_node=nil>
+linked_list.r_append_node(node2)       # => #<Node:0x007ff33a0ef300 @data="b", @next_node=nil>
+linked_list.r_append_node(node3)       # => #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>
+linked_list.r_append_node(node4)       # => #<Node:0x007ff33a0eece8 @data="d", @next_node=nil>
+linked_list.r_pop_tail                 # => nil
+linked_list.r_tail                     # => #<Node:0x007ff33a0ef008 @data="c", @next_node=nil>
