@@ -306,6 +306,11 @@ class RecursiveLinkedList
       end
     end
 
+
+    def r_append_node_after(new_node, previous_node, node=@r_head)
+
+    end
+
 end
 
 linked_list = IterativeLinkedList.new
